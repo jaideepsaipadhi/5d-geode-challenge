@@ -3,7 +3,24 @@ Target: G(1000,1000,1000,1000,1000). Rubine (arXiv 2512.21785) claimed the 4D ca
 5D case needs "new innovations". DERIVATION.md contains the new idea: a 1-D integral representation
 reducing the computation from O(M^3) time / O(M^2) memory to O(M^2) time / O(M) memory.
 
-## Run commands (256-core pod)
+
+## Results (all values in this repository, each verified against fresh primes)
+
+| D | digits | file |
+|---|--------|------|
+| 4 | 6036 | G_D4_M1000.txt (reproduces Rubine, arXiv 2512.21785) |
+| 5 | 8367 | G_D5_M1000.txt (the challenge) |
+| 6 | 10866 | G_D6_M1000.txt |
+| 7 | 13506 | G_D7_M1000.txt |
+| 8 | 16267 | G_D8_M1000.txt |
+| 9 | 19135 | G_D9_M1000.txt |
+| 10 | 22097 | G_D10_M1000.txt |
+
+The full derivation is in note.pdf and DERIVATION.md. Any value can be re-verified modulo
+primes of your choosing in seconds: python3 -c "from geode_batch import G_modp_batch; print(G_modp_batch(1000, 5, [1073741789]))"
+then compare with int(open('G_D5_M1000.txt').read()) % 1073741789.
+
+## Run commands (adjust --workers to your real core count)
     python3 validate_all.py                                            # must print ALL PASS
     python3 run_geode_cpu.py --D 4 --M 1000 --workers 256 --batch 4    # acceptance, ~30-40s wall
     python3 run_geode_cpu.py --D 5 --M 1000 --workers 256 --batch 4    # the challenge, ~60s wall
