@@ -1,0 +1,4 @@
+EMAIL_DRAFT.md
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
